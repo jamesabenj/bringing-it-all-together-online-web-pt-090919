@@ -41,6 +41,7 @@ def save
 end
 
 def self.create(name:, breed:)
+  binding.pry
   dog = Dog.new(name, breed)
   dog.save
   dog
