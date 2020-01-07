@@ -26,9 +26,6 @@ def self.drop_table
   DB[:conn].execute(sql)
 end
 
-def self.create(name:, breed:)
-end
-
 def self.new_from_db(row)
   new_dog = self.new
   new_dog.id = row[0]
@@ -43,9 +40,28 @@ def self.find_by_name(name)
   Dog.new(result[0], result[1], result[2])
 end
 
+def self.create(name:, breed:)
+end
+
+
+
 def update(id:, name:, breed:)
     sql = "UPDATE dogs SET name = ?, breed = ? WHERE id = ?"
     DB[:conn].execute(sql, self.name, self.breed, self.id)
+end
+
+def save
+  if self.id
+    self.update
+  else
+    sql = <<-SQL
+      INSERT INTO dogs (name, breed)
+      VALUES (?, ?)
+    SQL
+    DB[:conn].execute(sql, self.name, self.breed)
+    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM dogs")[0][0]
+    #binding.pry
+  end
 end
 
 def self.find_by_id(id)
