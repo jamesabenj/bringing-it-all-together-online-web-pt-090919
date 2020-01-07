@@ -60,6 +60,11 @@ def save
   #end
 end
 
+def self.create(name:, breed:)
+  dog = Dog.new(name:, breed:)
+  dog.save
+end
+
 def self.find_by_id(id)
   sql = "SELECT * FROM dogs WHERE id = ?"
   result = DB[:conn].execute(sql, id)[0]
