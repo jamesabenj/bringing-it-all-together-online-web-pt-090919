@@ -54,6 +54,9 @@ def self.find_by_id(id)
   Dog.new(result[0], result[1], result[2])
 end
 
+def find_or_create_by
+end
+
 def save
   if self.id
     self.update
