@@ -26,6 +26,9 @@ def self.drop_table
   DB[:conn].execute(sql)
 end
 
+def self.create(name:, breed:)
+end
+
 def self.new_from_db(row)
   new_dog = self.new
   new_dog.id = row[0]
