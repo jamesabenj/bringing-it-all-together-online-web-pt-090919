@@ -53,9 +53,10 @@ def save
       INSERT INTO dogs (name, breed)
       VALUES (?, ?)
     SQL
-    x = DB[:conn].execute(sql, self.name, self.breed)
+    DB[:conn].execute(sql, self.name, self.breed)
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM dogs")[0][0]
-    binding.pry
+    
+    #binding.pry
   #end
 end
 
