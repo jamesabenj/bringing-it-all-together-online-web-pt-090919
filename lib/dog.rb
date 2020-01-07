@@ -60,10 +60,11 @@ def save
 end
 
 def self.create(name:, breed:)
-  dog = Dog.new(name, breed)
+  dog = Dog.new
+  dog.name = name
+  dog.breed = breed
   dog.save
   dog
-  binding.pry
 end
 
 def self.find_by_id(id)
