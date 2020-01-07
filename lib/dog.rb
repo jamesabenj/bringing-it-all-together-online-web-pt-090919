@@ -26,25 +26,6 @@ def self.drop_table
   DB[:conn].execute(sql)
 end
 
-def self.new_from_db(row)
-  new_dog = self.new
-  new_dog.id = row[0]
-  new_dog.name = row[1]
-  new_dog.breed = row[2]
-  new_dog
-end
-
-def self.find_by_name(name)
-  sql = "SELECT * FROM dogs WHERE name = ?"
-  result = DB[:conn].execute(sql, name)[0]
-  Dog.new(result[0], result[1], result[2])
-end
-
-def update(id:, name:, breed:)
-    sql = "UPDATE dogs SET name = ?, breed = ? WHERE id = ?"
-    DB[:conn].execute(sql, self.name, self.breed, self.id)
-end
-
 def save
   #if self.id
     #self.update
@@ -72,6 +53,25 @@ def self.find_by_id(id)
 end
 
 def self.find_or_create_by
+end
+
+def self.new_from_db(row)
+  new_dog = self.new
+  new_dog.id = row[0]
+  new_dog.name = row[1]
+  new_dog.breed = row[2]
+  new_dog
+end
+
+def self.find_by_name(name)
+  sql = "SELECT * FROM dogs WHERE name = ?"
+  result = DB[:conn].execute(sql, name)[0]
+  Dog.new(result[0], result[1], result[2])
+end
+
+def update(id:, name:, breed:)
+    sql = "UPDATE dogs SET name = ?, breed = ? WHERE id = ?"
+    DB[:conn].execute(sql, self.name, self.breed, self.id)
 end
 
 
